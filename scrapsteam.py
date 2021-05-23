@@ -103,12 +103,6 @@ def pesquisar(termo, numbusca, qttd):
 
         return gameslist
 
-    def output(results):
-        gamesdf = pd.concat([pd.DataFrame(g) for g in results])
-        gamesdf.to_csv('gameprices.csv', index=False)
-        print('Fim. Salvo para CSV')
-        return
-
     results = []
 
     # quantidade de itens que serão pegos
@@ -118,7 +112,6 @@ def pesquisar(termo, numbusca, qttd):
         data = get_data(f'https://store.steampowered.com/search/results/?query&start={x}&count=50&dynamic_data=&sort_by={tipobusca}&term={busca}&force_infinite=1&category1=998&snr=1_7_7_151_7&infinite=1')
         results.append(parse(data))
 
-    output(results)
     return results
 
 

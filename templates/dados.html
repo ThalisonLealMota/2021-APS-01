@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Resultado{% endblock %}
+{% block content %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Imagem</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Preço</th>
+            <th scope="col">IdGame</th>
+            <th scope="col">Lançamento</th>
+            <th scope="col">Reviews</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dado in dados %}
+        {% for item in dado %}
+        <tr class='clickable-row' data-href='{{ item["href"] }}'>
+            <td>{{ loop.index }}</td>
+            <td><img src = "{{ item['img'] }}"></td>
+            <td>{{ item['title'] }}</td>
+            <td>R${{ item['price'] }}</td>
+            <td>{{ item['gameid'] }}</td>
+            <td>{{ item['released'] }}</td>
+            <td>{{ item['reviews'] }}</td>
+            <td><button><a class="nav-item nav-link" id="signUp" href="{{ item['href']}}">Fonte</a></button></td>
+        <tr>
+        {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

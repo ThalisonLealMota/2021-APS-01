@@ -12,6 +12,7 @@ def pesquisar(termo, numbusca, qttd):
     #5 - Maior Preço
     #6 - Análises de úsuarios
 
+    numbusca = int(numbusca)
 
     if numbusca == 1:
         tipobusca = ''
@@ -53,11 +54,6 @@ def pesquisar(termo, numbusca, qttd):
         soup = BeautifulSoup(html, 'html.parser')
 
         try:
-            released = soup.find('div', class_='hover_release').span.text.split(':')[-1].strip()
-        except:
-            released = ''
-
-        try:
             reviews_raw = soup.find('div', class_='hover_review_summary').text
         except:
             reviews = ''
@@ -66,7 +62,7 @@ def pesquisar(termo, numbusca, qttd):
             pattern = r'\d+'
             reviews = int(''.join(re.findall(pattern, reviews_raw)))
 
-        dados = [released, reviews]
+        dados = [reviews]
 
         return dados
 
@@ -87,6 +83,9 @@ def pesquisar(termo, numbusca, qttd):
             imgsrc = game.find('div', {'class': 'search_capsule'}).img['src']
             href = game['href']
             gameid = href.split('/')[4]
+            
+        
+            released = game.find('div', class_='col search_released responsive_secondrow').text.split(':')[-1].strip()
 
             hover_data = get_hover_data(gameid)
 
@@ -94,8 +93,8 @@ def pesquisar(termo, numbusca, qttd):
                     'title': title,
                     'price': price,
                     'gameid': gameid,
-                    'released': hover_data[0],
-                    'reviews': hover_data[1],
+                    'released': released,
+                    'reviews': hover_data[0],
                     'img': imgsrc,
                     'href': href,
             }
@@ -108,8 +107,10 @@ def pesquisar(termo, numbusca, qttd):
     # quantidade de itens que serão pegos
     # para pegar todos utilizar a função totalresults com o url
 
+    qttd = int(qttd)
+
     for x in range(0, qttd, 50):
-        data = get_data(f'https://store.steampowered.com/search/results/?query&start={x}&count=50&dynamic_data=&sort_by={tipobusca}&term={busca}&force_infinite=1&category1=998&snr=1_7_7_151_7&infinite=1')
+        data = get_data(f'https://store.steampowered.com/search/results/?query&start={x}&count=50&dynamic_data=&sort_by={tipobusca}&term={busca}&snr=1_7_7_151_7&category1=998&infinite=1')
         results.append(parse(data))
 
     return results

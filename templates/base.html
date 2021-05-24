@@ -2,6 +2,25 @@
 <html>
 
 <head>
+  <style>
+    input{
+      
+      width: 343;
+
+    }
+
+    button{
+      
+      border-radius: 50%;
+
+    }
+
+    label{
+
+      color: white;
+
+    }
+  </style>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -19,15 +38,33 @@
     </button>
     <div class="collapse navbar-collapse" id="navbar">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" id="home" href="/">Home</a>
-        <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-        <a class="nav-item nav-link" id="login" href="/login">Login</a>
-        <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+        <form action="/" method="post">
+        <p><input type="text" name="pesquisa" placeholder="inserir termo de busca" />
+            <label>Ordenar por:</label>
+           <select name="ordem" id="ordem">
+             <option value="1">Relevância</option>
+             <option value="2">Data de lançamento</option>
+             <option value="3">Nome</option>
+             <option value="4">Menor Preço</option>
+             <option value="5">Maior Preço</option>
+             <option value="6">Análises de úsuarios</option>
+           </select>
+           <label>Quantidade de resultados</label>
+           <select name="qttd" id="qttd">
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="150">150</option>
+            <option value="200">200</option>
+            <option value="250">250</option>
+            <option value="300">300</option>
+          </select>
+        <button type="submit" name="submit" >Pesquisar</button></p>
+        </form>
       </div>
     </div>
   </nav>
 
-  <div class="container">{% block content %}Nada{% endblock %}</div>
+  <div class="container">{% block content %}{% endblock %}</div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
   </script>

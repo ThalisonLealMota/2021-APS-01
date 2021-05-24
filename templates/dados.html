@@ -14,10 +14,11 @@
         </tr>
     </thead>
     <tbody>
+        {%set l = namespace(value = 0)%}
         {% for dado in dados %}
         {% for item in dado %}
         <tr class='clickable-row' data-href='{{ item["href"] }}'>
-            <td>{{ loop.index }}</td>
+            <td>{{ loop.index + l.value }}</td>
             <td><img src = "{{ item['img'] }}"></td>
             <td>{{ item['title'] }}</td>
             <td>R${{ item['price'] }}</td>
@@ -27,6 +28,7 @@
             <td><button><a class="nav-item nav-link" id="signUp" href="{{ item['href']}}">Fonte</a></button></td>
         <tr>
         {% endfor %}
+        {% set l.value = l.value + 50 %}
         {% endfor %}
     </tbody>
 </table>

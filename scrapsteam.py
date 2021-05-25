@@ -2,7 +2,6 @@ def pesquisar(termo, numbusca, qttd):
     import requests
     from bs4 import BeautifulSoup
     import json
-    import pandas as pd
     import re
 
     #1 - Relevância
@@ -62,9 +61,7 @@ def pesquisar(termo, numbusca, qttd):
             pattern = r'\d+'
             reviews = int(''.join(re.findall(pattern, reviews_raw)))
 
-        dados = [reviews]
-
-        return dados
+        return reviews
 
     def parse(data):
 
@@ -87,14 +84,14 @@ def pesquisar(termo, numbusca, qttd):
         
             released = game.find('div', class_='col search_released responsive_secondrow').text.split(':')[-1].strip()
 
-            hover_data = get_hover_data(gameid)
+            reviews = get_hover_data(gameid)
 
             mygame = {
                     'title': title,
                     'price': price,
                     'gameid': gameid,
                     'released': released,
-                    'reviews': hover_data[0],
+                    'reviews': reviews,
                     'img': imgsrc,
                     'href': href,
             }

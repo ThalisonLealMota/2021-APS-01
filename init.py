@@ -76,6 +76,11 @@ def home():
     else:
         return render_template("base.html")
 
+@app.route("/listar")
+def listar():
+    
+    items = jogos.query.all()
+    return render_template("listar.html", lista=items)
 
 
 if __name__ == '__main__':

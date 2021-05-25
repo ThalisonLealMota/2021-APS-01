@@ -55,7 +55,7 @@ def pesquisar(termo, numbusca, qttd):
         try:
             reviews_raw = soup.find('div', class_='hover_review_summary').text
         except:
-            reviews = ''
+            reviews = 0
 
         else:
             pattern = r'\d+'
@@ -75,7 +75,7 @@ def pesquisar(termo, numbusca, qttd):
                 price = float(game.find('div', {'class': 'search_price'}).text.strip().split('R$')[-1].replace(',','.'))
                 
             except:
-                price = float(0.00)
+                price = float(0)
             
             imgsrc = game.find('div', {'class': 'search_capsule'}).img['src']
             href = game['href']

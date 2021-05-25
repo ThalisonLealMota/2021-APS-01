@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Lista{% endblock %}
+{% block content %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Imagem</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Preço</th>
+            <th scope="col">IdGame</th>
+            <th scope="col">Lançamento</th>
+            <th scope="col">Reviews</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dado in lista %}
+        <tr class>
+            <td>{{dado._id}}</td>
+            <td><img src = "{{ dado.imagem }}"></td>
+            <td>{{dado.titulo}}</td>
+            <td>{{dado.preco}}</td>
+            <td>{{dado.gameid}}</td>
+            <td>{{dado.lancamento}}</td>
+            <td>{{dado.reviews}}</td>
+            <td><button><a class="nav-item nav-link" id="signUp" href="{{ dado.href}}">Fonte</a></button></td>
+        <tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
